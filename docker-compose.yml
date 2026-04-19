@@ -1,0 +1,17 @@
+services:
+  synology-whisper:
+    image: ghcr.io/aldarondo/synology-whisper:latest
+    container_name: synology-whisper
+    restart: unless-stopped
+    ports:
+      - "8778:8778"
+    environment:
+      PORT: 8778
+    networks:
+      - brian-mcp_default
+
+# Join the shared brian network so brian-telegram can reach this service
+# at http://synology-whisper:8778 without going through the host
+networks:
+  brian-mcp_default:
+    external: true
