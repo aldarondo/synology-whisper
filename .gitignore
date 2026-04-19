@@ -1,0 +1,25 @@
+# ── Docker ────────────────────────────────────────
+*.tar
+
+# ── Secrets & credentials (always ignore) ─────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.json
+secrets/
+
+# ── Model files (large binaries — download at build time) ─
+*.bin
+*.gguf
+models/
+
+# ── OS & editor ───────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+.vscode/settings.json
+.idea/workspace.xml
