@@ -16,8 +16,11 @@ RUN git clone --depth 1 --branch ${WHISPER_VERSION} \
 RUN cmake -B build \
       -DCMAKE_BUILD_TYPE=Release \
       -DWHISPER_BUILD_EXAMPLES=ON \
-      -DWHISPER_NO_AVX2=OFF \
       -DBUILD_SHARED_LIBS=OFF \
+      -DGGML_AVX=OFF \
+      -DGGML_AVX2=OFF \
+      -DGGML_FMA=OFF \
+      -DGGML_F16C=OFF \
     && cmake --build build --config Release -j$(nproc) --target whisper-server
 
 # Download base.en model (~142 MB) — fast on CPU, good accuracy for short voice msgs
