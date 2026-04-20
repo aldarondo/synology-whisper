@@ -12,15 +12,22 @@ ARG WHISPER_VERSION=v1.7.4
 RUN git clone --depth 1 --branch ${WHISPER_VERSION} \
     https://github.com/ggerganov/whisper.cpp.git .
 
+# Bump to bust GHA layer cache when cmake flags change
+ARG CACHE_BUST=2
+
 # Build server example (CPU-only, no CUDA/Metal)
+# Target baseline x86-64 (SSE2 only) — NAS has Intel N3710 (Braswell), no AVX support
 RUN cmake -B build \
       -DCMAKE_BUILD_TYPE=Release \
       -DWHISPER_BUILD_EXAMPLES=ON \
       -DBUILD_SHARED_LIBS=OFF \
+      -DGGML_NATIVE=OFF \
       -DGGML_AVX=OFF \
       -DGGML_AVX2=OFF \
       -DGGML_FMA=OFF \
       -DGGML_F16C=OFF \
+      "-DCMAKE_C_FLAGS=-mno-avx -mno-avx2 -mno-fma -mno-f16c" \
+      "-DCMAKE_CXX_FLAGS=-mno-avx -mno-avx2 -mno-fma -mno-f16c" \
     && cmake --build build --config Release -j$(nproc) --target whisper-server
 
 # Download base.en model (~142 MB) — fast on CPU, good accuracy for short voice msgs
