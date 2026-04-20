@@ -2,11 +2,10 @@
 > Tag key: `[Code]` = Claude Code · `[Synology]` = /synology skill · `[Human]` = Charles must act
 
 ## 🔄 In Progress
-<!-- nothing active -->
+- [ ] `[CI]` Dockerfile fix pushed — CI rebuilding image with `-DBUILD_SHARED_LIBS=OFF` to fix missing `libwhisper.so.1`; auto-deploys to NAS on success
+- [ ] `[Synology]` Smoke test with a real voice message OGG file — pending CI rebuild
 
 ## 🔲 Backlog
-- [ ] `[Synology]` Pull image and create container on NAS via `/synology` skill
-- [ ] `[Synology]` Smoke test with a real voice message OGG file
 
 ## ✅ Completed
 - [x] `[Code]` 2026-04-19 — Dockerfile: multi-stage whisper.cpp build + `base.en` model baked in, ffmpeg in runtime for audio conversion
