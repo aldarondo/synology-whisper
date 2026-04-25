@@ -9,6 +9,11 @@ services:
       PORT: 8778
     networks:
       - brian-mcp_default
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
 
 # Join the shared brian network so brian-telegram can reach this service
 # at http://synology-whisper:8778 without going through the host
