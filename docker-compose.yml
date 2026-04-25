@@ -8,7 +8,7 @@ services:
     environment:
       PORT: 8778
     volumes:
-      - ./logs:/app/logs
+      - /volume1/docker/synology-whisper/logs:/app/logs
     command: sh -c "./whisper-server -m ./models/ggml-base.en.bin -t 4 --host 0.0.0.0 --port $$PORT 2>&1 | tee -a /app/logs/app.log"
     networks:
       - brian-mcp_default
